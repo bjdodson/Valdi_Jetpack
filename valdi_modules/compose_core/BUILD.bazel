@@ -1,0 +1,34 @@
+load("@valdi//bzl/valdi:valdi_module.bzl", "valdi_module")
+
+valdi_module(
+    name = "compose_core",
+    srcs = glob([
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "test/**/*.ts",
+        "test/**/*.tsx",
+    ]) + [
+        "tsconfig.json",
+    ],
+    android_output_target = "release",
+    ids_yaml = "ids.yaml",
+    ios_module_name = "ComposeCore",
+    ios_output_target = "release",
+    res = [],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@valdi//src/valdi_modules/src/valdi/valdi_core",
+        "@valdi//src/valdi_modules/src/valdi/valdi_tsx",
+    ],
+)
+
+sh_test(
+    name = "compose_core_placeholder_test",
+    srcs = ["test/placeholder_test.sh"],
+    data = [
+        "src/layout/Box.tsx",
+        "src/layout/Column.tsx",
+        "src/layout/Row.tsx",
+        "src/layout/Spacer.tsx",
+    ],
+)

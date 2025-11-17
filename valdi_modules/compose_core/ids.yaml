@@ -1,0 +1,19 @@
+ids:
+  compose_core_row:
+    description: "Compose-style Row flex container"
+  compose_core_column:
+    description: "Compose-style Column flex container"
+  compose_core_box:
+    description: "Compose-style Box overlay container"
+  compose_core_spacer:
+    description: "Compose-style Spacer element for padding/gap fill"
+  compose_core_lazy_row:
+    description: "Compose-style LazyRow scroll container"
+  compose_core_lazy_column:
+    description: "Compose-style LazyColumn scroll container"
+  compose_core_text:
+    description: "Compose-style Text label"
+  compose_core_image:
+    description: "Compose-style Image element"
+  compose_core_card:
+    description: "Compose-style Card surface container"
