@@ -1,5 +1,6 @@
 import { Component } from "valdi_core/src/Component";
-import { FlexAlignItems, FlexContainerProps, FlexJustifyContent, FlexWrap } from "./types";
+import { Layout, View } from "valdi_tsx/src/NativeTemplateElements";
+import { FlexAlignItems, FlexContainerProps, FlexJustifyContent, FlexWrap, toStyle } from "./types";
 
 export interface RowProps extends FlexContainerProps {
   horizontalArrangement?: FlexJustifyContent;
@@ -17,13 +18,14 @@ export class Row extends Component<RowProps> {
       testTag,
       accessibilityLabel,
     } = this.viewModel ?? {};
+    const resolvedStyle = toStyle<Layout | View>(style as any);
 
     <view
       flexDirection="row"
       justifyContent={horizontalArrangement}
       alignItems={verticalAlignment}
       flexWrap={wrap}
-      style={style}
+      style={resolvedStyle}
       accessibilityId={testTag}
       accessibilityLabel={accessibilityLabel}
     >

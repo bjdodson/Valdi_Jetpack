@@ -1,6 +1,6 @@
 import { Component } from "valdi_core/src/Component";
-import { CSSValue } from "valdi_tsx/src/NativeTemplateElements";
-import { FlexContainerProps } from "./types";
+import { CSSValue, Layout, View } from "valdi_tsx/src/NativeTemplateElements";
+import { FlexContainerProps, toStyle } from "./types";
 
 export interface SpacerProps extends FlexContainerProps {
   width?: CSSValue;
@@ -33,6 +33,7 @@ export class Spacer extends Component<SpacerProps> {
       testTag,
       accessibilityLabel,
     } = this.viewModel ?? {};
+    const resolvedStyle = toStyle<Layout | View>(style as any);
 
     <view
       width={width}
@@ -44,7 +45,7 @@ export class Spacer extends Component<SpacerProps> {
       flexGrow={flexGrow}
       flexShrink={flexShrink}
       flexBasis={flexBasis}
-      style={style}
+      style={resolvedStyle}
       accessibilityId={testTag}
       accessibilityLabel={accessibilityLabel}
     />;

@@ -47,3 +47,17 @@
 - Authored README.md and expanded AGENTS.md with Valdi Jetpack contributor guidance (build/run commands, module loader notes, compose_core import guidance).
 ## 2025-11-18T06:08:20Z – Codex
 - Added repo-level README and expanded AGENTS; introduced .gitignore with Bazel/Valdi/node/OS ignores. Provided git add guidance pending commit.
+## 2025-11-18T06:39:18Z – Codex
+- Swapped ComposePlayground to use compose_core Box/Text in place of raw view/label; added Box onTap support and updated FlexContainer props for gesture handling.
+## 2025-11-18T06:41:58Z – Codex
+- Fixed ComposePlayground Box root to use flex rather than flexGrow to satisfy Valdi Style typing after jetpack component swap.
+## 2025-11-18T06:42:39Z – Codex
+- Removed unsupported flex/flexGrow style on root Box in ComposePlayground to satisfy Valdi Style typing.
+## 2025-11-18T06:44:29Z – Codex
+- Relaxed compose_core FlexContainerProps.style to accept partial layout/view objects (needed for padding/minHeight literals) and fixed previous style error in playground.
+## 2025-11-18T06:44:59Z – Codex
+- Relaxed compose_core Text style typing to accept partial layout/view/label objects (marginTop, etc.) to stop playground TS errors.
+## 2025-11-18T06:46:11Z – Codex
+- Added toStyle helper and used across Box/Row/Column/Spacer/Text to wrap partial style objects into Valdi Style, fixing playground style-type errors.
+## 2025-11-18T06:46:52Z – Codex
+- Patched toStyle to cast partial style into Style<T> to satisfy TS typing in compose_core.

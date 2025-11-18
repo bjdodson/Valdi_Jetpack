@@ -1,6 +1,42 @@
 {
-  "extends": "../valdi_modules/_configs/base.tsconfig.json",
+  "extends": "../../bazel-valdi_jetpack/external/valdi/modules/_configs/base.tsconfig.json",
   "include": [
     "src/**/*"
-  ]
+],
+"compilerOptions": {
+    "paths": {
+        "compose_playground/*": [
+            "./*"
+        ],
+        "jasmine/*": [
+            "../../bazel-valdi_jetpack/external/valdi/src/valdi_modules/src/valdi/jasmine/*"
+        ],
+        "coreutils/*": [
+            "../../bazel-valdi_jetpack/external/valdi/src/valdi_modules/src/valdi/coreutils/*"
+        ],
+        "source_map/*": [
+            "../../bazel-valdi_jetpack/external/valdi/src/valdi_modules/src/valdi/source_map/*"
+        ],
+        "valdi_tsx/*": [
+            "../../bazel-valdi_jetpack/external/valdi/src/valdi_modules/src/valdi/valdi_tsx/*"
+        ],
+        "valdi_core/*": [
+            "../../bazel-valdi_jetpack/external/valdi/src/valdi_modules/src/valdi/valdi_core/*"
+        ],
+        "compose_core/*": [
+            "../../valdi_modules/compose_core/*",
+            "../../bazel-out/darwin_arm64-fastbuild/bin/valdi_modules/compose_core/.valdi_build/projectsync/generated_ts/compose_core/*"
+        ],
+        "tslib": [
+            "../../bazel-valdi_jetpack/external/valdi/src/valdi_modules/src/valdi/valdi_core/src/tslib"
+        ]
+    },
+    "types": [
+        "../../bazel-valdi_jetpack/external/valdi/modules/types/Long",
+        "../../bazel-valdi_jetpack/external/valdi/modules/types/globals"
+    ],
+    "rootDirs": [
+        ".."
+    ]
+}
 }

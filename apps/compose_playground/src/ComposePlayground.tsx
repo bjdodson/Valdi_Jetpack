@@ -1,5 +1,5 @@
 import { StatefulComponent } from 'valdi_core/src/Component';
-import { Row, Column, Box } from 'compose_core/src/index';
+import { Row, Column, Box, Text } from 'compose_core/src/index';
 import { FlexJustifyContent } from 'compose_core/src/layout/types';
 
 export interface ComposePlaygroundViewModel {}
@@ -50,114 +50,133 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
   onRender(): void {
     const arrangement = ARRANGEMENTS[this.state.arrangementIndex];
 
-    <view flexGrow={1}>
+    <Box>
       <scroll backgroundColor="#f5f5f7">
-        <view padding="32 24 48 24" minHeight="100%">
-          <label value="Valdi Compose Playground" color="#0f172a" accessibilityCategory="header" />
-          <label value="Small showcase powered by compose_core primitives." marginTop={8} color="#475467" />
-          <view marginTop={32}>
+        <Box style={{ padding: "32 24 48 24", minHeight: "100%" }}>
+          <Text text="Valdi Compose Playground" color="#0f172a" accessibilityLabel="Valdi Compose Playground heading" />
+          <Text text="Small showcase powered by compose_core primitives." style={{ marginTop: 8 }} color="#475467" />
+          <Box style={{ marginTop: 32 }}>
             {this.renderRowDemo(arrangement)}
             {this.renderColumnDemo()}
             {this.renderStateDemo()}
-          </view>
-        </view>
+          </Box>
+        </Box>
       </scroll>
-    </view>;
+    </Box>;
   }
 
   private renderRowDemo(arrangement: ArrangementOption) {
-    <view
-      backgroundColor="white"
-      padding="20"
-      borderRadius={28}
-      marginBottom={24}
-      boxShadow="0 18 48 rgba(15, 23, 42, 0.08)"
+    <Box
+      style={{
+        backgroundColor: "white",
+        padding: "20",
+        borderRadius: 28,
+        marginBottom: 24,
+        boxShadow: "0 18 48 rgba(15, 23, 42, 0.08)",
+      }}
     >
-      <label value="Row layout" color="#0f172a" />
-      <label value={`horizontalArrangement: ${arrangement.label}`} marginTop={4} color="#475467" />
-      <view
-        marginTop={12}
-        padding="10 16"
-        borderRadius={999}
-        backgroundColor="#111827"
-        alignSelf="flex-start"
+      <Text text="Row layout" color="#0f172a" />
+      <Text text={`horizontalArrangement: ${arrangement.label}`} style={{ marginTop: 4 }} color="#475467" />
+      <Box
+        style={{
+          marginTop: 12,
+          padding: "10 16",
+          borderRadius: 999,
+          backgroundColor: "#111827",
+          alignSelf: "flex-start",
+        }}
         onTap={this.handleCycleArrangement}
       >
-        <label color="white" value="Tap to cycle alignment" />
-      </view>
+        <Text color="white" text="Tap to cycle alignment" />
+      </Box>
       <Row horizontalArrangement={arrangement.value} verticalAlignment="center">
         {BOX_COLORS.forEach((color, index) => {
           this.renderDemoBox(String.fromCharCode(65 + index), color);
         })}
       </Row>
-    </view>;
+    </Box>;
   }
 
   private renderColumnDemo() {
-    <view
-      backgroundColor="white"
-      padding="20"
-      borderRadius={28}
-      marginBottom={24}
-      boxShadow="0 18 48 rgba(15, 23, 42, 0.08)"
+    <Box
+      style={{
+        backgroundColor: "white",
+        padding: "20",
+        borderRadius: 28,
+        marginBottom: 24,
+        boxShadow: "0 18 48 rgba(15, 23, 42, 0.08)",
+      }}
     >
-      <label value="Column layout" color="#0f172a" />
-      <label value="horizontalAlignment: stretch" marginTop={4} color="#475467" />
+      <Text text="Column layout" color="#0f172a" />
+      <Text text="horizontalAlignment: stretch" style={{ marginTop: 4 }} color="#475467" />
       <Column horizontalAlignment="stretch" verticalArrangement="flex-start">
         {FEATURE_GROUPS.forEach(group => {
-          <view backgroundColor="#f9fafb" padding="12 16" borderRadius={18} marginTop={12}>
-            <label value={group.title} color="#0f172a" />
-            <view marginTop={8}>
+          <Box
+            style={{
+              backgroundColor: "#f9fafb",
+              padding: "12 16",
+              borderRadius: 18,
+              marginTop: 12,
+            }}
+          >
+            <Text text={group.title} color="#0f172a" />
+            <Box style={{ marginTop: 8 }}>
               <Row horizontalArrangement="flex-start" verticalAlignment="center" wrap="wrap">
                 {group.tags.forEach(tag => {
                   this.renderTag(tag);
                 })}
               </Row>
-            </view>
-          </view>;
+            </Box>
+          </Box>;
         })}
       </Column>
-    </view>;
+    </Box>;
   }
 
   private renderStateDemo() {
-    <view
-      backgroundColor="white"
-      padding="20"
-      borderRadius={28}
-      marginBottom={24}
-      boxShadow="0 18 48 rgba(15, 23, 42, 0.08)"
+    <Box
+      style={{
+        backgroundColor: "white",
+        padding: "20",
+        borderRadius: 28,
+        marginBottom: 24,
+        boxShadow: "0 18 48 rgba(15, 23, 42, 0.08)",
+      }}
     >
-      <label value="Stateful components" color="#0f172a" />
-      <label value="StatefulComponent + setState demo" marginTop={4} color="#475467" />
-      <view marginTop={16}>
+      <Text text="Stateful components" color="#0f172a" />
+      <Text text="StatefulComponent + setState demo" style={{ marginTop: 4 }} color="#475467" />
+      <Box style={{ marginTop: 16 }}>
         <Row horizontalArrangement="flex-start" verticalAlignment="center" wrap="wrap">
           <Box contentAlignment="center">
-            <view
-              margin="4 12 4 0"
-              padding="14 18"
-              borderRadius={22}
-              backgroundColor="#1d4ed8"
-              alignItems="center"
-              justifyContent="center"
+            <Box
+              style={{
+                margin: "4 12 4 0",
+                padding: "14 18",
+                borderRadius: 22,
+                backgroundColor: "#1d4ed8",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
-              <label value={`Counter: ${this.state.counter}`} color="white" />
-            </view>
+              <Text text={`Counter: ${this.state.counter}`} color="white" />
+            </Box>
           </Box>
-          <view
-            margin="4 12 4 0"
-            padding="12 18"
-            borderRadius={999}
-            backgroundColor="#dbeafe"
-            alignItems="center"
+          <Box
+            style={{
+              margin: "4 12 4 0",
+              padding: "12 18",
+              borderRadius: 999,
+              backgroundColor: "#dbeafe",
+              alignItems: "center",
+            }}
             onTap={this.incrementCounter}
           >
-            <label value="Tap to increment" color="#1d4ed8" />
-          </view>
+            <Text text="Tap to increment" color="#1d4ed8" />
+          </Box>
         </Row>
-      </view>
+      </Box>
       {this.context.onDone ? this.renderExitButton() : undefined}
-    </view>;
+    </Box>;
   }
 
   private renderExitButton() {
@@ -165,45 +184,51 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
       return;
     }
 
-    <view
-      marginTop={16}
-      alignSelf="flex-start"
-      padding="12 20"
-      borderRadius={16}
-      backgroundColor="#111827"
+    <Box
+      style={{
+        marginTop: 16,
+        alignSelf: "flex-start",
+        padding: "12 20",
+        borderRadius: 16,
+        backgroundColor: "#111827",
+      }}
       onTap={this.context.onDone}
     >
-      <label value="Close playground" color="white" />
-    </view>;
+      <Text text="Close playground" color="white" />
+    </Box>;
   }
 
   private renderDemoBox(label: string, color: string) {
     <Box contentAlignment="center">
-      <view
-        width={64}
-        height={64}
-        backgroundColor={color}
-        margin={6}
-        borderRadius={20}
-        alignItems="center"
-        justifyContent="center"
+      <Box
+        style={{
+          width: 64,
+          height: 64,
+          backgroundColor: color,
+          margin: 6,
+          borderRadius: 20,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
-        <label value={label} color="white" />
-      </view>
+        <Text text={label} color="white" />
+      </Box>
     </Box>;
   }
 
   private renderTag(label: string) {
-    <view
-      padding="6 12"
-      borderRadius={14}
-      margin="4 8 4 0"
-      backgroundColor="#e0e7ff"
-      alignItems="center"
-      justifyContent="center"
+    <Box
+      style={{
+        padding: "6 12",
+        borderRadius: 14,
+        margin: "4 8 4 0",
+        backgroundColor: "#e0e7ff",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
-      <label value={label} color="#312e81" />
-    </view>;
+      <Text text={label} color="#312e81" />
+    </Box>;
   }
 
   private handleCycleArrangement = () => {

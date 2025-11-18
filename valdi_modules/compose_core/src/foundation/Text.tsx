@@ -9,6 +9,7 @@ import {
   View,
 } from "valdi_tsx/src/NativeTemplateElements";
 import { TouchEvent } from "valdi_tsx/src/GestureEvents";
+import { toStyle } from "../layout/types";
 
 export interface TextProps {
   text: LabelValue;
@@ -21,7 +22,7 @@ export interface TextProps {
   textDecoration?: LabelTextDecoration;
   accessibilityLabel?: string;
   testTag?: string;
-  style?: Style<Label | View | Layout>;
+  style?: Style<Label | View | Layout> | Partial<Label & View & Layout>;
   onTap?: (event: TouchEvent) => void;
 }
 
@@ -44,6 +45,7 @@ export class Text extends Component<TextProps> {
       style,
       onTap,
     } = this.viewModel ?? {};
+    const resolvedStyle = toStyle<Label | View | Layout>(style as any);
 
     <label
       value={text}
@@ -57,7 +59,7 @@ export class Text extends Component<TextProps> {
       accessibilityLabel={accessibilityLabel}
       accessibilityId={testTag}
       onTap={onTap}
-      style={style}
+      style={resolvedStyle}
     />;
   }
 }
