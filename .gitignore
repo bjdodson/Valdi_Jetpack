@@ -1,0 +1,14 @@
+# OS cruft
+.DS_Store
+
+# Bazel outputs
+bazel-*/
+bazel-bin
+bazel-out
+bazel-testlogs
+
+# Valdi generated output
+.valdi_build
+
+# Node/bazel npm caches
+node_modules

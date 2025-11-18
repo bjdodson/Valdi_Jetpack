@@ -1,0 +1,6 @@
+{
+  "extends": "../valdi_modules/_configs/base.tsconfig.json",
+  "include": [
+    "src/**/*"
+  ]
+}

@@ -1,7 +1,15 @@
 # Project Plan – Valdi Jetpack Component Library
 
+## Background
+Valdi is an open source framework for building mobile apps, targeting Android and iOS. Valdi modules are written in typescript, and render natively on host platforms. It is React-like but is not React. It uses the Flexbox layout engine and some features of CSS. The source code is available at ../Valdi. 
+
+Valdi itself includes a compiler, runtime, and dev tools to build apps. "Valdi Widgets" is another repo located at ../Valdi_Widgets, that implements a component library to build apps. It also has a playground app to try them out.
+
+Jetpack Compose is Android's modern UI framework. Amongst other things, it has a core component library used as building blocks to make apps.
+
+
 ## Objective
-Build a Valdi module that mirrors Jetpack Compose primitives and Material components so Valdi app teams can share UI structure, theming, and samples across Android and iOS. The library should live in `valdi_modules/compose_*` and integrate with the upstream Valdi repo via Bazel.
+Build a Valdi module that mirrors Jetpack Compose primitives and Material components so devs have a familiar toolkit when writing apps in Valdi.. The library should live in `valdi_modules/compose_*` And builds with `valdi` cli.
 
 ## Non-goals
 - Re-implementing the full Jetpack Compose runtime or Kotlin compiler plugin.

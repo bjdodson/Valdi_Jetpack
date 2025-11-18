@@ -1,0 +1,32 @@
+load("@valdi//bzl/valdi:valdi_application.bzl", "valdi_application")
+load("@valdi//bzl/valdi:valdi_module.bzl", "valdi_module")
+
+valdi_application(
+    name = "app",
+    root_component_path = "ComposePlaygroundApp@compose_playground/src/ComposePlaygroundApp",
+    title = "Valdi Compose Playground",
+    ios_bundle_id = "com.snap.valdi.composeplayground",
+    ios_families = ["iphone"],
+    android_package = "com.snap.valdi.composeplayground",
+    deps = [":compose_playground"],
+)
+
+valdi_module(
+    name = "compose_playground",
+    srcs = glob([
+        "src/**/*.ts",
+        "src/**/*.tsx",
+    ]) + [
+        "tsconfig.json",
+    ],
+    res = [],
+    ios_module_name = "VLComposePlayground",
+    ios_output_target = "release",
+    android_output_target = "release",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//valdi_modules/compose_core",
+        "@valdi//src/valdi_modules/src/valdi/valdi_core",
+        "@valdi//src/valdi_modules/src/valdi/valdi_tsx",
+    ],
+)

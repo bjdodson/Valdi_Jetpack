@@ -1,0 +1,4 @@
+module(name = "valdi_jetpack", version = "0.0.1")
+
+# Bazel modules are disabled in .bazelrc for now, but we keep this file
+# so future migrations have a starting point.
