@@ -1,4 +1,5 @@
 import { StatefulComponent } from 'valdi_core/src/Component';
+import { systemBoldFont } from 'valdi_core/src/SystemFont';
 import { Row, Column, Box, Text } from 'compose_core/src/index';
 import { FlexJustifyContent } from 'compose_core/src/layout/types';
 
@@ -201,17 +202,16 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
   private renderDemoBox(label: string, color: string) {
     <Box contentAlignment="center">
       <Box
+        contentAlignment="center"
         style={{
           width: 64,
           height: 64,
           backgroundColor: color,
           margin: 6,
           borderRadius: 20,
-          alignItems: "center",
-          justifyContent: "center",
         }}
       >
-        <Text text={label} color="white" />
+        <Text text={label} color="red" font={systemBoldFont(14)} />
       </Box>
     </Box>;
   }

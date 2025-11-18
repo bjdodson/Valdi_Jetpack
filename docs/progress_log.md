@@ -61,3 +61,7 @@
 - Added toStyle helper and used across Box/Row/Column/Spacer/Text to wrap partial style objects into Valdi Style, fixing playground style-type errors.
 ## 2025-11-18T06:46:52Z – Codex
 - Patched toStyle to cast partial style into Style<T> to satisfy TS typing in compose_core.
+## 2025-11-18T06:52:34Z – Codex
+- Center demo box labels
+## 2025-11-18T06:58:06Z – Codex
+- Make Row demo labels bold
