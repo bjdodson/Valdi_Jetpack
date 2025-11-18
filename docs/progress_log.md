@@ -65,3 +65,5 @@
 - Center demo box labels
 ## 2025-11-18T06:58:06Z – Codex
 - Make Row demo labels bold
+## 2025-11-18T06:59:25Z – Codex
+- Added latest desktop screenshot to README via docs/images/latest-screenshot.png.
