@@ -3,7 +3,7 @@
 Valdi Jetpack is a small playground that ships a handful of Compose-style primitives (`compose_core`) and a sample Valdi app (`compose_playground`) to exercise them. It targets the Valdi runtime (https://github.com/snapchat/valdi) and is meant to be a lightweight starting point for experimenting and iterating on Valdi UI patterns.
 
 ## Screenshot
-![Valdi Compose playground](docs/images/latest-screenshot.png)
+<img src="docs/images/latest-screenshot.png" width="400" />
 
 ## Prerequisites
 - macOS with Xcode command line tools for the macOS/iOS targets.
