@@ -1,0 +1,6 @@
+diff --git a/third-party/harfbuzz/harfbuzz.BUILD b/third-party/harfbuzz/harfbuzz.BUILD
+--- a/third-party/harfbuzz/harfbuzz.BUILD
++++ b/third-party/harfbuzz/harfbuzz.BUILD
+@@ -27,0 +28,2 @@ COMPILER_FLAGS = [
++    "-Wno-unknown-warning-option",
++    "-Wno-nontrivial-memcall",

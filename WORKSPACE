@@ -6,6 +6,14 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "valdi",
+    patch_args = ["-p1"],
+    patches = [
+        "//third_party/valdi:clang-literal-operators.patch",
+        "//third_party/valdi:clang-harfbuzz-nontrivial-memcall.patch",
+        "//third_party/valdi:clang-hermes-nontrivial-memcall.patch",
+        "//third_party/valdi:macos-respect-scroll-direction.patch",
+        "//third_party/valdi:macos-custom-native-views.patch",
+    ],
     strip_prefix = "Valdi-beta-0.0.1",
     url = "https://github.com/Snapchat/Valdi/archive/refs/tags/beta-0.0.1.tar.gz",
 )
