@@ -76,6 +76,38 @@ export {
   type TextFieldColors,
   type TextFieldProps,
 } from "./foundation/TextField";
+export {
+  DirectoryPickerButton,
+  defaultDirectoryPickerCopy,
+  directoryPickerAvailable,
+  resolveDirectoryPickerCopy,
+  type DirectoryPickerButtonProps,
+  type DirectoryPickerCopy,
+} from "./foundation/DirectoryPickerButton";
+export {
+  ImageExportActions,
+  defaultImageExportLabels,
+  imageExportAvailable,
+  imageExportNativeCommand,
+  imageExportOperationFromRequest,
+  imageExportRequest,
+  normalizeImageExportOutcome,
+  normalizeImageExportReason,
+  resolveImageExportColors,
+  resolveImageExportLabels,
+  type ImageExportActionsColors,
+  type ImageExportActionsProps,
+  type ImageExportLabels,
+  type ImageExportOperation,
+  type ImageExportOutcome,
+  type ImageExportReason,
+  type ImageExportResult,
+} from "./foundation/ImageExportActions";
+export {
+  macOSNativeActionAvailable,
+  nativeActionWebRuntimePresent,
+  nativeMacOSActionAvailable,
+} from "./foundation/NativeActionAvailability";
 export { type ComposeCorePlaceholder } from "./types/PlaceholderModel";
 
 /**

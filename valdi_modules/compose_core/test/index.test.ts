@@ -3,7 +3,9 @@ import {
   Button,
   Card,
   Column,
+  DirectoryPickerButton,
   Image,
+  ImageExportActions,
   LazyColumn,
   LazyGrid,
   LazyRow,
@@ -40,8 +42,8 @@ import {
   textLineHeightRatio,
 } from "compose_core/src/index";
 
-[Row, Column, Box, Spacer, LazyRow, LazyColumn, Text, Image, Card, Button, Slider,
-  SegmentedControl, Toggle, Switch, Select, TabBar, TextField, LazyGrid].forEach(component => {
+[Row, Column, Box, Spacer, LazyRow, LazyColumn, Text, Image, Card, Button, DirectoryPickerButton,
+  ImageExportActions, Slider, SegmentedControl, Toggle, Switch, Select, TabBar, TextField, LazyGrid].forEach(component => {
   if (typeof component !== "function") {
     throw new Error(`Expected component export to be a class/function, got ${typeof component}`);
   }

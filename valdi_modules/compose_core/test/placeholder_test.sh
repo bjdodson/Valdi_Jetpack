@@ -49,6 +49,8 @@ check_native_control() {
 }
 
 check_native_control "$FOUNDATION/Button.tsx" "Button" "view"
+check_native_control "$FOUNDATION/DirectoryPickerButton.tsx" "DirectoryPickerButton" "custom-view"
+check_native_control "$FOUNDATION/ImageExportActions.tsx" "ImageExportActions" "custom-view"
 check_native_control "$FOUNDATION/Slider.tsx" "Slider" "view"
 check_native_control "$FOUNDATION/SegmentedControl.tsx" "SegmentedControl" "view"
 check_native_control "$FOUNDATION/Toggle.tsx" "Toggle" "view"

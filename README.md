@@ -25,17 +25,20 @@ bazel run //apps/compose_playground:app_macos \
 bazel build //valdi_modules/compose_core:compose_core
 ```
 
-3) Run the Valdi-native module tests and structural smoke test:
+3) Run the native Valdi tests and structural contracts:
 ```sh
 bazel test \
   //valdi_modules/compose_core:test \
   //valdi_modules/compose_core:compose_core_placeholder_test \
-  //valdi_modules/compose_core:foundation_correctness_test
+  //valdi_modules/compose_core:foundation_correctness_test \
+  //valdi_modules/compose_core:controlled_controls_contract_test \
+  //valdi_modules/compose_core:macos_directory_picker_contract_test \
+  //valdi_modules/compose_core:macos_image_export_contract_test
 ```
 
 ## Project layout
 - `apps/compose_playground/`: Valdi app entry with `root_component_path = ComposePlaygroundApp@compose_playground/src/ComposePlaygroundApp`.
-- `valdi_modules/compose_core/`: Compose-like layout, text/image/card, controlled input, list, and fixed-height LazyGrid primitives.
+- `valdi_modules/compose_core/`: Compose-like layout, text/image/card, controlled input, list, fixed-height LazyGrid, and guarded macOS native-action primitives.
 - `scripts/`: helper scripts; `log_progress.sh` should be run after meaningful changes.
 - `docs/`: parity matrix, notes, and progress log.
 
@@ -43,6 +46,7 @@ bazel test \
 - `root_component_path` must use the `<Component>@<valdi_module>/src/...` format so the Valdi module loader resolves bundled assets (repository-relative paths will fail at runtime).
 - When consuming `compose_core`, import from `compose_core/src/index` to match the generated `.valdimodule` contents.
 - TypeScript is strict via `_configs/base.tsconfig.json`; keep exports surfaced through `src/index.ts` files.
+- Native directory selection and image export are macOS-only. Other platforms, including desktop web, render explicit unavailable states without instantiating an AppKit custom view.
 
 ## Troubleshooting
 - Android builds will fail without a configured SDK/NDK (`ANDROID_NDK_HOME`, `ANDROID_HOME`).
