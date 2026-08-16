@@ -1,0 +1,17 @@
+diff --git a/valdi/src/valdi/macos/SCValdiSnapDrawingNSView.mm b/valdi/src/valdi/macos/SCValdiSnapDrawingNSView.mm
+--- a/valdi/src/valdi/macos/SCValdiSnapDrawingNSView.mm
++++ b/valdi/src/valdi/macos/SCValdiSnapDrawingNSView.mm
+@@ -276,9 +276,11 @@
+     auto direction = snap::drawing::Vector::make(0, 0);
+     if (eventType == snap::drawing::TouchEventTypeWheel) {
+-        auto inversionMultiplier = (sourceEvent.isDirectionInvertedFromDevice ? -1 : 1);
+         // TODO: When !hasPreciseScrollingDeltas we should be multiplying by line/row height.
+         // This is the case when using a mouse wheel rather than trackpad gestures.
+         // Currently using 10 just so it's not abysmally slow to scroll using a mouse wheel.
+         auto additionalScrollingMultiplier = (sourceEvent.hasPreciseScrollingDeltas ? 1 : 10);
+-        direction = snap::drawing::Vector::make(sourceEvent.scrollingDeltaX * inversionMultiplier * additionalScrollingMultiplier, sourceEvent.scrollingDeltaY * inversionMultiplier * additionalScrollingMultiplier);
++        // AppKit already inverts scrolling deltas according to the user's system preference.
++        // Keep those platform-adjusted values so Valdi scroll views behave like native macOS views.
++        direction = snap::drawing::Vector::make(sourceEvent.scrollingDeltaX * additionalScrollingMultiplier,
++                                                sourceEvent.scrollingDeltaY * additionalScrollingMultiplier);
+     }

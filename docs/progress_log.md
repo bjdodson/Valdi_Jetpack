@@ -67,3 +67,5 @@
 - Make Row demo labels bold
 ## 2025-11-18T06:59:25Z – Codex
 - Added latest desktop screenshot to README via docs/images/latest-screenshot.png.
+## 2026-08-16T20:35:33Z – Codex
+- Added a focused extraction-time patch set for pinned Valdi beta-0.0.1: modern Clang compatibility, native macOS scroll direction, and NSView-bounded custom view resolution. Added five structural Bazel tests and a removal-oriented design note. Validated all five tests plus compose_core and compose_playground builds with macOS dependencies; next: merge before native compose controls depend on custom views.

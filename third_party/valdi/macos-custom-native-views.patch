@@ -1,0 +1,14 @@
+diff --git a/valdi/src/valdi/macos/SCValdiMacOSViewManager.mm b/valdi/src/valdi/macos/SCValdiMacOSViewManager.mm
+--- a/valdi/src/valdi/macos/SCValdiMacOSViewManager.mm
++++ b/valdi/src/valdi/macos/SCValdiMacOSViewManager.mm
+@@ -320,5 +320,10 @@ static Valdi::StringBox resolveClassName(const Valdi::StringBox& valdiClassName)
+     if (valdiClassName == textFieldClassName()) {
+         return STRING_LITERAL("SCValdiMacOSTextField");
+     }
++    NSString *requestedClassName = NSStringFromString(valdiClassName);
++    Class requestedClass = NSClassFromString(requestedClassName);
++    if (requestedClass && [requestedClass isSubclassOfClass:[NSView class]]) {
++        return valdiClassName;
++    }
+     return Valdi::StringBox::emptyString();
+ }

@@ -1,0 +1,6 @@
+diff --git a/valdi/BUILD.bazel b/valdi/BUILD.bazel
+--- a/valdi/BUILD.bazel
++++ b/valdi/BUILD.bazel
+@@ -227,0 +228,2 @@ cc_library(
++        "-Wno-unknown-warning-option",
++        "-Wno-nontrivial-memcall",
