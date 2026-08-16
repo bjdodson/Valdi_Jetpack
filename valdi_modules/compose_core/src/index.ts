@@ -3,7 +3,7 @@ export { Column, type ColumnProps } from "./layout/Column";
 export { Box, type BoxProps } from "./layout/Box";
 export { Spacer, type SpacerProps } from "./layout/Spacer";
 export { LazyRow, LazyColumn, type LazyListProps, type ContentPadding } from "./layout/LazyList";
-export { Text, type TextProps } from "./foundation/Text";
+export { Text, type TextProps, textLineHeightRatio } from "./foundation/Text";
 export { Image, type ImageProps, type ContentScale } from "./foundation/Image";
 export { Card, type CardProps } from "./foundation/Card";
 export { type ComposeCorePlaceholder } from "./types/PlaceholderModel";
