@@ -1,6 +1,18 @@
 import { StatefulComponent } from 'valdi_core/src/Component';
 import { systemBoldFont } from 'valdi_core/src/SystemFont';
-import { Row, Column, Box, Text } from 'compose_core/src/index';
+import {
+  Box,
+  Button,
+  Column,
+  Row,
+  SegmentedControl,
+  Select,
+  Slider,
+  TabBar,
+  Text,
+  TextField,
+  Toggle,
+} from 'compose_core/src/index';
 import { FlexJustifyContent } from 'compose_core/src/layout/types';
 
 export interface ComposePlaygroundViewModel {}
@@ -16,6 +28,13 @@ export interface ComposePlaygroundContext {
 interface ComposePlaygroundState {
   arrangementIndex: number;
   counter: number;
+  density: string;
+  enabled: boolean;
+  outputFormat: string;
+  progress: number;
+  selectedTab: string;
+  submittedName: string;
+  textValue: string;
 }
 
 type ArrangementOption = {
@@ -38,6 +57,24 @@ const FEATURE_GROUPS = [
   { title: 'Wrapping', tags: ['nowrap', 'wrap', 'wrap-reverse'] },
 ];
 
+const DENSITY_OPTIONS = [
+  { label: 'Compact', value: 'compact' },
+  { label: 'Comfortable', value: 'comfortable' },
+  { label: 'Spacious', value: 'spacious' },
+];
+
+const FORMAT_OPTIONS = [
+  { label: 'PNG', value: 'png' },
+  { label: 'JPEG', value: 'jpeg' },
+  { label: 'TIFF (unavailable)', value: 'tiff', disabled: true },
+];
+
+const TAB_OPTIONS = [
+  { label: 'Inputs', value: 'inputs' },
+  { label: 'Preview', value: 'preview' },
+  { label: 'Disabled', value: 'disabled', disabled: true },
+];
+
 /**
  * @Component
  * @ExportModel({ ios: 'VLComposePlaygroundView', android: 'com.snap.valdi.composeplayground.ComposePlaygroundView' })
@@ -46,6 +83,13 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
   state: ComposePlaygroundState = {
     arrangementIndex: 0,
     counter: 0,
+    density: 'comfortable',
+    enabled: true,
+    outputFormat: 'png',
+    progress: 35,
+    selectedTab: 'inputs',
+    submittedName: '',
+    textValue: 'Compose sample',
   };
 
   onRender(): void {
@@ -60,6 +104,7 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
             {this.renderRowDemo(arrangement)}
             {this.renderColumnDemo()}
             {this.renderStateDemo()}
+            {this.renderControlledControlsDemo()}
           </Box>
         </Box>
       </scroll>
@@ -180,6 +225,111 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
     </Box>;
   }
 
+  private renderControlledControlsDemo() {
+    <Box
+      style={{
+        backgroundColor: 'white',
+        padding: '20',
+        borderRadius: 28,
+        marginBottom: 24,
+        boxShadow: '0 18 48 rgba(15, 23, 42, 0.08)',
+      }}
+    >
+      <Text text="Controlled inputs" color="#0f172a" />
+      <Text
+        text="The parent owns every value; controls emit change requests. Neutral tokens are the default."
+        style={{ marginTop: 4 }}
+        color="#475467"
+      />
+
+      <Box style={{ marginTop: 18 }}>
+        <Text text="Button" color="#0f172a" />
+        <Row horizontalArrangement="flex-start" verticalAlignment="center" wrap="wrap">
+          <Box style={{ margin: '8 8 0 0' }}>
+            <Button label={`Pressed ${this.state.counter}`} onPress={this.incrementCounter} />
+          </Box>
+          <Box style={{ margin: '8 8 0 0' }}>
+            <Button label="Secondary" tone="secondary" onPress={this.incrementCounter} />
+          </Box>
+          <Box style={{ margin: '8 8 0 0' }}>
+            <Button label="Disabled" disabled={true} onPress={this.incrementCounter} />
+          </Box>
+        </Row>
+      </Box>
+
+      <Box style={{ marginTop: 18 }}>
+        <Slider
+          label="Progress"
+          valueLabel={`${this.state.progress}%`}
+          value={this.state.progress}
+          min={0}
+          max={100}
+          step={5}
+          onValueChange={this.handleProgressChange}
+          onValueChangeFinished={this.handleProgressCommit}
+        />
+      </Box>
+
+      <Box style={{ marginTop: 18 }}>
+        <Text text="Density" color="#0f172a" />
+        <Box style={{ marginTop: 8 }}>
+          <SegmentedControl
+            options={DENSITY_OPTIONS}
+            value={this.state.density}
+            onValueChange={this.handleDensityChange}
+          />
+        </Box>
+      </Box>
+
+      <Box style={{ marginTop: 18 }}>
+        <Toggle
+          checked={this.state.enabled}
+          label="Enable live preview"
+          supportingText="Per-control theme overrides can be supplied without changing the shared default."
+          theme={{ accent: '#7c3aed', surfaceSelected: '#ede9fe' }}
+          onCheckedChange={this.handleEnabledChange}
+        />
+      </Box>
+
+      <Box style={{ marginTop: 18 }}>
+        <Text text="Output format" color="#0f172a" />
+        <Box style={{ marginTop: 8 }}>
+          <Select
+            options={FORMAT_OPTIONS}
+            value={this.state.outputFormat}
+            onValueChange={this.handleOutputFormatChange}
+            accessibilityLabel="Output format"
+          />
+        </Box>
+      </Box>
+
+      <Box style={{ marginTop: 18 }}>
+        <TabBar
+          options={TAB_OPTIONS}
+          value={this.state.selectedTab}
+          onValueChange={this.handleTabChange}
+          accessibilityLabel="Playground sections"
+        />
+      </Box>
+
+      <Box style={{ marginTop: 18 }}>
+        <Text text="Name" color="#0f172a" />
+        <Box style={{ marginTop: 8 }}>
+          <TextField
+            value={this.state.textValue}
+            placeholder="Type a sample name"
+            accessibilityLabel="Sample name"
+            onValueChange={this.handleTextChange}
+            onSubmit={this.handleTextSubmit}
+          />
+        </Box>
+        {this.state.submittedName ? (
+          <Text text={`Submitted: ${this.state.submittedName}`} color="#475467" style={{ marginTop: 8 }} />
+        ) : undefined}
+      </Box>
+    </Box>;
+  }
+
   private renderExitButton() {
     if (!this.context.onDone) {
       return;
@@ -238,5 +388,37 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
 
   private incrementCounter = () => {
     this.setState({ counter: this.state.counter + 1 });
+  };
+
+  private handleProgressChange = (progress: number) => {
+    this.setState({ progress });
+  };
+
+  private handleProgressCommit = (progress: number) => {
+    console.log(`Slider committed ${progress}`);
+  };
+
+  private handleDensityChange = (density: string) => {
+    this.setState({ density });
+  };
+
+  private handleEnabledChange = (enabled: boolean) => {
+    this.setState({ enabled });
+  };
+
+  private handleOutputFormatChange = (outputFormat: string) => {
+    this.setState({ outputFormat });
+  };
+
+  private handleTabChange = (selectedTab: string) => {
+    this.setState({ selectedTab });
+  };
+
+  private handleTextChange = (textValue: string) => {
+    this.setState({ textValue });
+  };
+
+  private handleTextSubmit = (submittedName: string) => {
+    this.setState({ submittedName });
   };
 }
