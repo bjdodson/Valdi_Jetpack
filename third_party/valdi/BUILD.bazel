@@ -2,9 +2,16 @@ exports_files([
     "clang-harfbuzz-nontrivial-memcall.patch",
     "clang-hermes-nontrivial-memcall.patch",
     "clang-literal-operators.patch",
+    "device-macos-capability.patch",
     "macos-custom-native-views.patch",
     "macos-respect-scroll-direction.patch",
 ])
+
+sh_test(
+    name = "device_macos_capability_patch_test",
+    srcs = ["test/device_macos_capability_patch_test.sh"],
+    data = ["device-macos-capability.patch"],
+)
 
 sh_test(
     name = "clang_hermes_nontrivial_memcall_patch_test",
