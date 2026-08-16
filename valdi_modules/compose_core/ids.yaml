@@ -35,3 +35,17 @@ ids:
     description: "Controlled sibling-view tab selection row"
   compose_core_text_field:
     description: "Controlled single-line native text input"
+  compose_core_directory_picker:
+    description: "Native single-directory chooser with an unavailable fallback"
+  compose_core_image_export:
+    description: "Native image clipboard and file export actions"
+  compose_core_image_export_menu:
+    description: "Open image export choices"
+  compose_core_image_export_copy:
+    description: "Copy an image to the system clipboard"
+  compose_core_image_export_downloads:
+    description: "Save an image to Downloads without overwriting"
+  compose_core_image_export_save_as:
+    description: "Choose where to save an image"
+  compose_core_image_export_status:
+    description: "Image export completion, cancellation, or failure status"

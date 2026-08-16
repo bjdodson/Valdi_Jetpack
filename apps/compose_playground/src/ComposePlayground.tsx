@@ -4,6 +4,8 @@ import {
   Box,
   Button,
   Column,
+  DirectoryPickerButton,
+  ImageExportActions,
   LazyGrid,
   Row,
   SegmentedControl,
@@ -13,6 +15,7 @@ import {
   Text,
   TextField,
   Toggle,
+  type ImageExportResult,
 } from 'compose_core/src/index';
 import { FlexJustifyContent } from 'compose_core/src/layout/types';
 
@@ -31,10 +34,14 @@ interface ComposePlaygroundState {
   counter: number;
   density: string;
   enabled: boolean;
+  exportFileName: string;
+  exportSource: string;
+  exportStatus: string;
   outputFormat: string;
   progress: number;
   selectedTab: string;
   submittedName: string;
+  selectedDirectory: string;
   textValue: string;
 }
 
@@ -93,10 +100,14 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
     counter: 0,
     density: 'comfortable',
     enabled: true,
+    exportFileName: 'example-image.jpg',
+    exportSource: '',
+    exportStatus: '',
     outputFormat: 'png',
     progress: 35,
     selectedTab: 'inputs',
     submittedName: '',
+    selectedDirectory: '',
     textValue: 'Compose sample',
   };
 
@@ -114,6 +125,7 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
             {this.renderStateDemo()}
             {this.renderControlledControlsDemo()}
             {this.renderLazyGridDemo()}
+            {this.renderNativeActionsDemo()}
           </Box>
         </Box>
       </scroll>
@@ -386,6 +398,81 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
     </Box>;
   }
 
+  private renderNativeActionsDemo() {
+    <Box
+      style={{
+        backgroundColor: 'white',
+        padding: '20',
+        borderRadius: 28,
+        marginBottom: 24,
+        boxShadow: '0 18 48 rgba(15, 23, 42, 0.08)',
+      }}
+    >
+      <Text text="macOS native actions" color="#0f172a" />
+      <Text
+        text="Native panels are emitted only on macOS; other platforms show explicit unavailable states."
+        style={{ marginTop: 4 }}
+        color="#475467"
+      />
+
+      <Box style={{ marginTop: 18 }}>
+        <Text text="Directory picker" color="#0f172a" />
+        <Box style={{ width: 240, marginTop: 8 }}>
+          <DirectoryPickerButton
+            onPathSelected={this.handleDirectorySelected}
+            copy={{
+              label: 'Choose example folder…',
+              panelTitle: 'Choose an example folder',
+              panelMessage: 'The playground displays the selected path without modifying the folder.',
+            }}
+            accessibilityLabel="Choose an example folder"
+          />
+        </Box>
+        <Text
+          text={this.state.selectedDirectory || 'No folder selected.'}
+          color="#475467"
+          maxLines={2}
+          style={{ marginTop: 8 }}
+        />
+      </Box>
+
+      <Box style={{ marginTop: 18 }}>
+        <Text text="Image export" color="#0f172a" />
+        <Text
+          text="Paste a file, HTTP, or HTTPS image URL. No network request occurs while the field is empty."
+          color="#475467"
+          style={{ marginTop: 4 }}
+        />
+        <Box style={{ marginTop: 8 }}>
+          <TextField
+            value={this.state.exportSource}
+            onValueChange={this.handleExportSourceChange}
+            placeholder="Image URL"
+            accessibilityLabel="Image export source URL"
+          />
+        </Box>
+        <Box style={{ marginTop: 8 }}>
+          <TextField
+            value={this.state.exportFileName}
+            onValueChange={this.handleExportFileNameChange}
+            placeholder="Suggested file name"
+            accessibilityLabel="Suggested image export file name"
+          />
+        </Box>
+        <ImageExportActions
+          source={this.state.exportSource.trim()}
+          suggestedFileName={this.state.exportFileName.trim() || 'example-image.jpg'}
+          onResult={this.handleImageExportResult}
+          disabled={!this.state.exportSource.trim()}
+          style={{ marginTop: 10 }}
+        />
+        {this.state.exportStatus ? (
+          <Text text={this.state.exportStatus} color="#475467" style={{ marginTop: 7 }} />
+        ) : undefined}
+      </Box>
+    </Box>;
+  }
+
   private renderExitButton() {
     if (!this.context.onDone) {
       return;
@@ -476,5 +563,21 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
 
   private handleTextSubmit = (submittedName: string) => {
     this.setState({ submittedName });
+  };
+
+  private handleDirectorySelected = (selectedDirectory: string) => {
+    this.setState({ selectedDirectory });
+  };
+
+  private handleExportSourceChange = (exportSource: string) => {
+    this.setState({ exportSource, exportStatus: '' });
+  };
+
+  private handleExportFileNameChange = (exportFileName: string) => {
+    this.setState({ exportFileName });
+  };
+
+  private handleImageExportResult = (result: ImageExportResult) => {
+    this.setState({ exportStatus: `${result.operation}: ${result.outcome} · ${result.message}` });
   };
 }

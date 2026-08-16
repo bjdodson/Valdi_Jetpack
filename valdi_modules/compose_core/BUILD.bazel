@@ -1,5 +1,21 @@
 load("@valdi//bzl/valdi:valdi_module.bzl", "valdi_module")
 
+objc_library(
+    name = "macos_directory_picker",
+    srcs = ["macos/VJComposeDirectoryPickerButton.m"],
+    alwayslink = True,
+    deps = ["@valdi//valdi"],
+)
+
+objc_library(
+    name = "macos_image_export",
+    srcs = ["macos/VJComposeImageExportBridge.m"],
+    alwayslink = True,
+    sdk_frameworks = ["ImageIO"],
+    weak_sdk_frameworks = ["UniformTypeIdentifiers"],
+    deps = ["@valdi//valdi"],
+)
+
 valdi_module(
     name = "compose_core",
     srcs = glob([
@@ -14,6 +30,13 @@ valdi_module(
     ids_yaml = "ids.yaml",
     ios_module_name = "ComposeCore",
     ios_output_target = "release",
+    native_deps = select({
+        "@snap_platforms//conditions:macos": [
+            ":macos_directory_picker",
+            ":macos_image_export",
+        ],
+        "//conditions:default": [],
+    }),
     res = [],
     visibility = ["//visibility:public"],
     deps = [
@@ -29,6 +52,9 @@ sh_test(
     data = [
         "src/foundation/Button.tsx",
         "src/foundation/ControlTheme.ts",
+        "src/foundation/DirectoryPickerButton.tsx",
+        "src/foundation/ImageExportActions.tsx",
+        "src/foundation/NativeActionAvailability.ts",
         "src/foundation/SegmentedControl.tsx",
         "src/foundation/Select.tsx",
         "src/foundation/Slider.tsx",
@@ -40,6 +66,27 @@ sh_test(
         "src/layout/LazyGrid.tsx",
         "src/layout/Row.tsx",
         "src/layout/Spacer.tsx",
+    ],
+)
+
+sh_test(
+    name = "macos_directory_picker_contract_test",
+    srcs = ["test/macos_directory_picker_contract_test.sh"],
+    data = [
+        "macos/VJComposeDirectoryPickerButton.m",
+        "src/foundation/DirectoryPickerButton.tsx",
+        "src/foundation/NativeActionAvailability.ts",
+    ],
+)
+
+sh_test(
+    name = "macos_image_export_contract_test",
+    srcs = ["test/macos_image_export_contract_test.sh"],
+    data = [
+        "macos/VJComposeImageExportBridge.m",
+        "src/foundation/ImageExportActions.tsx",
+        "src/foundation/NativeActionAvailability.ts",
+        "BUILD.bazel",
     ],
 )
 
