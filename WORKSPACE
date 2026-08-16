@@ -13,6 +13,7 @@ http_archive(
         "//third_party/valdi:clang-hermes-nontrivial-memcall.patch",
         "//third_party/valdi:macos-respect-scroll-direction.patch",
         "//third_party/valdi:macos-custom-native-views.patch",
+        "//third_party/valdi:device-macos-capability.patch",
     ],
     strip_prefix = "Valdi-beta-0.0.1",
     url = "https://github.com/Snapchat/Valdi/archive/refs/tags/beta-0.0.1.tar.gz",
