@@ -17,6 +17,7 @@ export interface TextProps {
   font?: string;
   textAlign?: LabelTextAlign;
   maxLines?: number;
+  /** Absolute line height in layout points, matching Compose-style callers. */
   lineHeight?: number;
   letterSpacing?: number;
   textDecoration?: LabelTextDecoration;
@@ -24,6 +25,15 @@ export interface TextProps {
   testTag?: string;
   style?: Style<Label | View | Layout> | Partial<Label & View & Layout>;
   onTap?: (event: TouchEvent) => void;
+}
+
+/** Convert the public point-based line height to Valdi's font-size multiplier. */
+export function textLineHeightRatio(lineHeight?: number, font?: string): number | undefined {
+  if (lineHeight === undefined) {
+    return undefined;
+  }
+  const fontSize = font ? Number(font.trim().split(/\s+/)[1]) : 12;
+  return lineHeight / (Number.isFinite(fontSize) && fontSize > 0 ? fontSize : 12);
 }
 
 /**
@@ -46,6 +56,7 @@ export class Text extends Component<TextProps> {
       onTap,
     } = this.viewModel ?? {};
     const resolvedStyle = toStyle<Label | View | Layout>(style as any);
+    const resolvedLineHeight = textLineHeightRatio(lineHeight, font);
 
     <label
       value={text}
@@ -53,7 +64,7 @@ export class Text extends Component<TextProps> {
       font={font}
       textAlign={textAlign}
       numberOfLines={maxLines ?? 0}
-      lineHeight={lineHeight}
+      lineHeight={resolvedLineHeight}
       letterSpacing={letterSpacing}
       textDecoration={textDecoration}
       accessibilityLabel={accessibilityLabel}

@@ -1,6 +1,7 @@
 import { Component } from "valdi_core/src/Component";
 import { Style } from "valdi_core/src/Style";
 import { CSSValue, Layout, ScrollView, View } from "valdi_tsx/src/NativeTemplateElements";
+import { toStyle } from "./types";
 
 export type ContentPadding =
   | CSSValue
@@ -17,7 +18,7 @@ export interface LazyListProps<T = unknown> {
   itemSpacing?: CSSValue;
   contentPadding?: ContentPadding;
   showsScrollIndicators?: boolean;
-  style?: Style<ScrollView | View | Layout>;
+  style?: Style<ScrollView | View | Layout> | Partial<ScrollView & View & Layout>;
   accessibilityLabel?: string;
   testTag?: string;
 }
@@ -76,6 +77,7 @@ abstract class LazyListBase<T> extends Component<LazyListProps<T>> {
       showsScrollIndicators = false,
     } = this.viewModel ?? {};
     const padding = this.getContentPadding();
+    const resolvedStyle = toStyle<ScrollView | View | Layout>(style as any);
 
     <scroll
       horizontal={this.isHorizontal()}
@@ -83,7 +85,7 @@ abstract class LazyListBase<T> extends Component<LazyListProps<T>> {
       showsVerticalScrollIndicator={!this.isHorizontal() ? showsScrollIndicators : false}
       accessibilityLabel={accessibilityLabel}
       accessibilityId={testTag}
-      style={style}
+      style={resolvedStyle}
       {...padding}
     >
       {this.renderItems()}

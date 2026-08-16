@@ -69,3 +69,5 @@
 - Added latest desktop screenshot to README via docs/images/latest-screenshot.png.
 ## 2026-08-16T20:35:33Z – Codex
 - Added a focused extraction-time patch set for pinned Valdi beta-0.0.1: modern Clang compatibility, native macOS scroll direction, and NSView-bounded custom view resolution. Added five structural Bazel tests and a removal-oriented design note. Validated all five tests plus compose_core and compose_playground builds with macOS dependencies; next: merge before native compose controls depend on custom views.
+## 2026-08-16T20:59:40Z – Codex
+- Ported reusable compose_core foundation correctness: point-based Text line height conversion, Card plain-style and selected/disabled/accessibility/tap semantics, and LazyList plain-style interop. Added focused Bazel contract coverage and parity notes. Validated focused test, compose_core/playground module build, and native macOS app build after rebasing onto origin/main 57d946e. Existing placeholder test still fails independently because it expects <layout> while current layout primitives render <view>; next step is upstream review of the focused commit.

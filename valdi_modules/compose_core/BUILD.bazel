@@ -32,3 +32,14 @@ sh_test(
         "src/layout/Spacer.tsx",
     ],
 )
+
+sh_test(
+    name = "foundation_correctness_test",
+    srcs = ["test/foundation_correctness_test.sh"],
+    data = [
+        "src/foundation/Card.tsx",
+        "src/foundation/Text.tsx",
+        "src/index.ts",
+        "src/layout/LazyList.tsx",
+    ],
+)
