@@ -5,6 +5,7 @@ import {
   Column,
   Image,
   LazyColumn,
+  LazyGrid,
   LazyRow,
   Row,
   SegmentedControl,
@@ -40,7 +41,7 @@ import {
 } from "compose_core/src/index";
 
 [Row, Column, Box, Spacer, LazyRow, LazyColumn, Text, Image, Card, Button, Slider,
-  SegmentedControl, Toggle, Switch, Select, TabBar, TextField].forEach(component => {
+  SegmentedControl, Toggle, Switch, Select, TabBar, TextField, LazyGrid].forEach(component => {
   if (typeof component !== "function") {
     throw new Error(`Expected component export to be a class/function, got ${typeof component}`);
   }

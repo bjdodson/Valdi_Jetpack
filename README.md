@@ -25,14 +25,17 @@ bazel run //apps/compose_playground:app_macos \
 bazel build //valdi_modules/compose_core:compose_core
 ```
 
-3) Smoke the placeholder test (expand as needed):
+3) Run the Valdi-native module tests and structural smoke test:
 ```sh
-bazel test //valdi_modules/compose_core:compose_core_placeholder_test
+bazel test \
+  //valdi_modules/compose_core:test \
+  //valdi_modules/compose_core:compose_core_placeholder_test \
+  //valdi_modules/compose_core:foundation_correctness_test
 ```
 
 ## Project layout
 - `apps/compose_playground/`: Valdi app entry with `root_component_path = ComposePlaygroundApp@compose_playground/src/ComposePlaygroundApp`.
-- `valdi_modules/compose_core/`: Compose-like Row/Column/Box/Spacer, Text/Image/Card, LazyRow/LazyColumn primitives.
+- `valdi_modules/compose_core/`: Compose-like layout, text/image/card, controlled input, list, and fixed-height LazyGrid primitives.
 - `scripts/`: helper scripts; `log_progress.sh` should be run after meaningful changes.
 - `docs/`: parity matrix, notes, and progress log.
 

@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Column,
+  LazyGrid,
   Row,
   SegmentedControl,
   Select,
@@ -75,6 +76,13 @@ const TAB_OPTIONS = [
   { label: 'Disabled', value: 'disabled', disabled: true },
 ];
 
+const GRID_ITEMS = [
+  '01', '02', '03', '04', '05', '06',
+  '07', '08', '09', '10', '11', '12',
+  '13', '14', '15', '16', '17', '18',
+  '19', '20', '21', '22', '23', '24',
+];
+
 /**
  * @Component
  * @ExportModel({ ios: 'VLComposePlaygroundView', android: 'com.snap.valdi.composeplayground.ComposePlaygroundView' })
@@ -105,6 +113,7 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
             {this.renderColumnDemo()}
             {this.renderStateDemo()}
             {this.renderControlledControlsDemo()}
+            {this.renderLazyGridDemo()}
           </Box>
         </Box>
       </scroll>
@@ -327,6 +336,53 @@ export class ComposePlayground extends StatefulComponent<ComposePlaygroundViewMo
           <Text text={`Submitted: ${this.state.submittedName}`} color="#475467" style={{ marginTop: 8 }} />
         ) : undefined}
       </Box>
+    </Box>;
+  }
+
+  private renderLazyGridDemo(): void {
+    <Box
+      style={{
+        backgroundColor: "white",
+        padding: "20",
+        borderRadius: 28,
+        marginBottom: 24,
+        boxShadow: "0 18 48 rgba(15, 23, 42, 0.08)",
+      }}
+    >
+      <Text text="Lazy grid" color="#0f172a" />
+      <Text
+        text="Responsive columns with a fixed-height, viewport-windowed item set."
+        style={{ marginTop: 4, marginBottom: 14 }}
+        color="#475467"
+      />
+      <LazyGrid
+        items={GRID_ITEMS}
+        renderItem={(item, index) => this.renderGridItem(item, index)}
+        keyForItem={item => item}
+        minimumItemWidth={128}
+        itemHeight={86}
+        columnSpacing={10}
+        rowSpacing={10}
+        overscanRows={1}
+        accessibilityLabel="Responsive lazy grid example"
+        testTag="compose_playground_lazy_grid"
+      />
+    </Box>;
+  }
+
+  private renderGridItem(item: string, index: number): void {
+    <Box
+      contentAlignment="center"
+      style={{
+        width: "100%",
+        height: "100%",
+        borderRadius: 18,
+        backgroundColor: index % 2 === 0 ? "#eef2ff" : "#e0f2fe",
+        borderWidth: 1,
+        borderColor: index % 2 === 0 ? "#c7d2fe" : "#bae6fd",
+      }}
+    >
+      <Text text={`Item ${item}`} color="#1e3a8a" />
     </Box>;
   }
 

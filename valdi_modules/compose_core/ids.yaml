@@ -11,6 +11,8 @@ ids:
     description: "Compose-style LazyRow scroll container"
   compose_core_lazy_column:
     description: "Compose-style LazyColumn scroll container"
+  compose_core_lazy_grid:
+    description: "Viewport-windowed responsive fixed-height grid"
   compose_core_text:
     description: "Compose-style Text label"
   compose_core_image:

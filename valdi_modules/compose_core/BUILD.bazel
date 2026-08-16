@@ -37,6 +37,7 @@ sh_test(
         "src/foundation/Toggle.tsx",
         "src/layout/Box.tsx",
         "src/layout/Column.tsx",
+        "src/layout/LazyGrid.tsx",
         "src/layout/Row.tsx",
         "src/layout/Spacer.tsx",
     ],
