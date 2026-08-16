@@ -17,3 +17,19 @@ ids:
     description: "Compose-style Image element"
   compose_core_card:
     description: "Compose-style Card surface container"
+  compose_core_button:
+    description: "Controlled accessible action button"
+  compose_core_slider:
+    description: "Controlled bounded numeric slider"
+  compose_core_segmented_control:
+    description: "Controlled single-selection segmented control"
+  compose_core_toggle:
+    description: "Controlled boolean toggle or switch"
+  compose_core_select:
+    description: "Controlled accessible single-selection dropdown"
+  compose_core_select_menu:
+    description: "Expanded option list for a compose_core select"
+  compose_core_tab_bar:
+    description: "Controlled sibling-view tab selection row"
+  compose_core_text_field:
+    description: "Controlled single-line native text input"
