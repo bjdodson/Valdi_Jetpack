@@ -55,3 +55,10 @@ check_native_control "$FOUNDATION/Toggle.tsx" "Toggle" "view"
 check_native_control "$FOUNDATION/Select.tsx" "Select" "view"
 check_native_control "$FOUNDATION/TabBar.tsx" "TabBar" "view"
 check_native_control "$FOUNDATION/TextField.tsx" "TextField" "textfield"
+
+check_file "$BASE/LazyGrid.tsx" "LazyGrid" "view"
+
+if ! grep -q "function lazyGridLayout" "$BASE/LazyGrid.tsx"; then
+  echo "lazyGridLayout helper declaration missing in $BASE/LazyGrid.tsx" >&2
+  exit 1
+fi

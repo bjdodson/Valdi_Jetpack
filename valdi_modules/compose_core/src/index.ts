@@ -3,6 +3,14 @@ export { Column, type ColumnProps } from "./layout/Column";
 export { Box, type BoxProps } from "./layout/Box";
 export { Spacer, type SpacerProps } from "./layout/Spacer";
 export { LazyRow, LazyColumn, type LazyListProps, type ContentPadding } from "./layout/LazyList";
+export {
+  LazyGrid,
+  lazyGridMaterializationWindow,
+  type LazyGridProps,
+  type LazyGridLayout,
+  type LazyGridMaterializationWindow,
+  lazyGridLayout,
+} from "./layout/LazyGrid";
 export { Text, type TextProps, textLineHeightRatio } from "./foundation/Text";
 export { Image, type ImageProps, type ContentScale } from "./foundation/Image";
 export { Card, type CardProps } from "./foundation/Card";
