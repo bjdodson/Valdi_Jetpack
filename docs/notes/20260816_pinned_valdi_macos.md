@@ -1,18 +1,14 @@
-# Pinned Valdi macOS compatibility
+# Historical: pinned Valdi macOS compatibility
 
-Valdi Jetpack intentionally remains pinned to Valdi `beta-0.0.1`. The workspace
-therefore applies a small, reviewable patch set at dependency extraction time:
+This note records the patch set that was necessary while Valdi Jetpack used
+Valdi `beta-0.0.1`. It was superseded by the `beta-0.1.1` bzlmod migration
+documented in `20260816_valdi_0_1_1_migration.md`.
 
-- modern Clang compatibility for Yoga literal operators and the pinned
-  Harfbuzz/Hermes warning policy;
-- native macOS scroll direction, preserving AppKit's already-adjusted wheel
-  deltas;
-- custom macOS view resolution restricted to `NSView` subclasses, enabling
-  Jetpack-owned native controls while retaining the unknown-class fallback.
-- a truthful `Device.isMacOS()` capability across Valdi's TypeScript, web,
-  Android, iOS, and standalone bridges. Native macOS standalone returns true;
-  browser, mobile, Windows, and Linux hosts return false.
+The Yoga and Hermes fixes and generic macOS custom-view resolution are present
+upstream in `beta-0.1.1`. The upgraded Harfbuzz builds with the current Xcode
+toolchain without the old suppression. Valdi's upstream `Device.isDesktop()`
+and `Device.isWeb()` capabilities now provide the native-desktop boundary used
+by `compose_core`, so the seven-file `Device.isMacOS()` fork was retired.
 
-Each patch has a focused structural Bazel test under `third_party/valdi`. These
-patches should be removed independently when a future Valdi revision contains
-the equivalent behavior.
+Only the still-unupstreamed AppKit scroll-direction patch remains. It is applied
+by `MODULE.bazel` and retains its focused structural test.

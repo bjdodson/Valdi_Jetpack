@@ -8,16 +8,14 @@ promises, and product-specific palettes do not belong in these primitives.
 
 ## Platform boundary
 
-`NativeActionAvailability` requires the pinned runtime's truthful
-`Device.isMacOS()` capability **and**, as defense in depth, the absence of
-`window`/`document` web globals before either component emits an AppKit
-`<custom-view>`. iOS, Android, non-Apple standalone hosts, and web report false,
-render disabled explanatory fallbacks, and never resolve the native class.
+`NativeActionAvailability` requires Valdi's upstream `Device.isDesktop()`
+capability and rejects `Device.isWeb()` before either component emits an AppKit
+`<custom-view>`. iOS, Android, and web report false, render disabled explanatory
+fallbacks, and never resolve the native class.
 
-The Objective-C libraries are selected only for the macOS target and use
-`alwayslink` because Valdi resolves their `VJCompose…` classes by name. This
-depends on the pinned Valdi custom-`NSView` resolver patch documented in
-`20260816_pinned_valdi_macos.md`.
+The Objective-C libraries are attached through Valdi 0.1.x's `macos_deps` and
+use `alwayslink` because Valdi resolves their `VJCompose…` classes by name.
+Generic macOS custom-view resolution is upstream in Valdi `beta-0.1.1`.
 
 ## Directory picker contract
 

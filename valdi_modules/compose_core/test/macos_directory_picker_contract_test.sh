@@ -35,9 +35,8 @@ require_source "strongSelf.enabled" "$NATIVE" "picker completion must recheck th
 require_source "_panel == panel" "$NATIVE" "picker completion must reject a replaced panel"
 require_source "[panel cancel:nil]" "$NATIVE" "disabling the picker must dismiss its active panel"
 require_source "macOSNativeActionAvailable()" "$PRESENTATION" "picker must use the shared platform guard"
-require_source "Device.isMacOS()" "$AVAILABILITY" "picker availability must use the truthful native macOS capability"
-require_source 'typeof window !== "undefined"' "$AVAILABILITY" "desktop web must be excluded from native availability"
-require_source 'typeof document !== "undefined"' "$AVAILABILITY" "document-backed web runtimes must be excluded"
+require_source "Device.isDesktop()" "$AVAILABILITY" "picker availability must require an upstream native desktop capability"
+require_source "Device.isWeb()" "$AVAILABILITY" "desktop web must be excluded through Valdi's upstream web capability"
 require_source 'iosClass="VJComposeDirectoryPickerButton"' "$PRESENTATION" "presentation must request the namespaced native class"
 require_source "unavailableLabel" "$PRESENTATION" "picker must expose an unavailable fallback"
 

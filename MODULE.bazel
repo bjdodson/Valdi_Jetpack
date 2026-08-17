@@ -1,4 +1,145 @@
-module(name = "valdi_jetpack", version = "0.0.1")
+module(name = "valdi_jetpack", version = "0.1.0")
 
-# Bazel modules are disabled in .bazelrc for now, but we keep this file
-# so future migrations have a starting point.
+# Latest official Valdi release verified on 2026-08-16.
+VALDI_TAG = "beta-0.1.1"
+VALDI_URL = "https://github.com/Snapchat/Valdi/archive/" + VALDI_TAG + ".tar.gz"
+VALDI_PREFIX = "Valdi-" + VALDI_TAG
+VALDI_INTEGRITY = "sha256-y98Oa4cNuOu3XQM+HxNv78q6li6xwT2LT3SXw9y7Xzg="
+
+bazel_dep(name = "valdi", version = "0.1")
+archive_override(
+    integrity = VALDI_INTEGRITY,
+    module_name = "valdi",
+    patches = ["//third_party/valdi:macos-respect-scroll-direction.patch"],
+    patch_strip = 1,
+    strip_prefix = VALDI_PREFIX,
+    urls = [VALDI_URL],
+)
+
+# Valdi's internal local_path_overrides apply only when Valdi is the root
+# module. Consumers point each submodule at its directory in the same release.
+bazel_dep(name = "android_macros")
+archive_override(module_name = "android_macros", integrity = VALDI_INTEGRITY, urls = [VALDI_URL], strip_prefix = VALDI_PREFIX + "/bzl/macros")
+
+bazel_dep(name = "snap_macros")
+archive_override(module_name = "snap_macros", integrity = VALDI_INTEGRITY, urls = [VALDI_URL], strip_prefix = VALDI_PREFIX + "/bzl/valdi/snap_macros")
+
+bazel_dep(name = "snap_client_toolchains")
+archive_override(module_name = "snap_client_toolchains", integrity = VALDI_INTEGRITY, urls = [VALDI_URL], strip_prefix = VALDI_PREFIX + "/bzl/toolchains")
+
+bazel_dep(name = "snap_platforms")
+archive_override(module_name = "snap_platforms", integrity = VALDI_INTEGRITY, urls = [VALDI_URL], strip_prefix = VALDI_PREFIX + "/bzl/platforms")
+
+bazel_dep(name = "skia_user_config")
+archive_override(module_name = "skia_user_config", integrity = VALDI_INTEGRITY, urls = [VALDI_URL], strip_prefix = VALDI_PREFIX + "/third-party/skia_user_config")
+
+bazel_dep(name = "rules_hdrs")
+archive_override(module_name = "rules_hdrs", integrity = VALDI_INTEGRITY, urls = [VALDI_URL], strip_prefix = VALDI_PREFIX + "/third-party/rules_hdrs")
+
+bazel_dep(name = "valdi_toolchain")
+archive_override(module_name = "valdi_toolchain", integrity = VALDI_INTEGRITY, urls = [VALDI_URL], strip_prefix = VALDI_PREFIX + "/bin")
+
+bazel_dep(name = "resvg_libs")
+archive_override(module_name = "resvg_libs", integrity = VALDI_INTEGRITY, urls = [VALDI_URL], strip_prefix = VALDI_PREFIX + "/third-party/resvg/resvg_libs")
+
+# Prefer Apple's compiler for Objective-C and the hermetic LLVM toolchain for
+# platforms where it is needed.
+valdi_toolchains = use_extension("@valdi//bzl:valdi_toolchains.bzl", "valdi_toolchains")
+use_repo(valdi_toolchains, "local_config_apple_cc_toolchains", "local_config_apple_cc", "llvm_toolchain", "llvm_toolchain_llvm")
+register_toolchains("@local_config_apple_cc_toolchains//:all")
+register_toolchains("@llvm_toolchain//:all")
+
+# Android dependencies are hermetic in Valdi 0.1.x; local SDK/NDK installs are
+# no longer required for dependency resolution.
+bazel_dep(name = "rules_java", version = "7.4.0")
+bazel_dep(name = "rules_android", version = "0.6.5")
+bazel_dep(name = "rules_android_ndk", version = "0.1.3")
+
+remote_android_extensions = use_extension(
+    "@rules_android//bzlmod_extensions:android_extensions.bzl",
+    "remote_android_tools_extensions",
+)
+use_repo(remote_android_extensions, "android_gmaven_r8", "android_tools")
+
+hermetic_android_sdk_extension = use_extension("@valdi//bzl:hermetic_android_sdk.bzl", "hermetic_android_sdk_extension")
+hermetic_android_sdk_extension.configure(
+    api_level = 36,
+    build_tools_version = "34.0.0",
+)
+use_repo(hermetic_android_sdk_extension, "androidsdk")
+
+register_toolchains(
+    "@rules_android//toolchains/android:all",
+    "@rules_android//toolchains/android_sdk:all",
+)
+register_toolchains("@androidsdk//:sdk-toolchain", "@androidsdk//:all")
+
+hermetic_ndk_extension = use_extension("@valdi//bzl:hermetic_ndk.bzl", "hermetic_ndk_extension")
+use_repo(hermetic_ndk_extension, "androidndk")
+register_toolchains("@androidndk//:all")
+
+bazel_dep(name = "rules_kotlin", version = "1.9.0")
+single_version_override(module_name = "rules_kotlin", version = "1.9.0")
+bazel_dep(name = "rules_jvm_external", version = "6.2")
+
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    name = "android_mvn",
+    aar_import_bzl_label = "@rules_android//rules:rules.bzl",
+    artifacts = [
+        "androidx.annotation:annotation:1.1.0",
+        "androidx.appcompat:appcompat:1.2.0",
+        "androidx.appcompat:appcompat-resources:1.2.0",
+        "androidx.collection:collection:1.1.0",
+        "androidx.constraintlayout:constraintlayout:2.1.4",
+        "androidx.core:core:1.6.0",
+        "androidx.customview:customview:1.1.0",
+        "androidx.dynamicanimation:dynamicanimation:1.0.0",
+        "androidx.fragment:fragment:1.1.0",
+        "androidx.interpolator:interpolator:1.0.0",
+        "androidx.lifecycle:lifecycle-common:2.2.0",
+        "androidx.lifecycle:lifecycle-process:2.2.0",
+        "androidx.lifecycle:lifecycle-viewmodel:2.2.0",
+        "androidx.recyclerview:recyclerview:1.2.1",
+        "androidx.test:core:1.5.0",
+        "androidx.test.ext:junit:1.1.3",
+        "androidx.test:monitor:1.5.0",
+        "androidx.test:runner:1.5.0",
+        "com.google.android.material:material:1.2.0",
+        "com.google.code.findbugs:jsr305:3.0.2",
+        "com.google.code.gson:gson:2.8.6",
+        "com.google.protobuf.nano:protobuf-javanano:3.1.0",
+        "com.jakewharton.timber:timber:4.7.1",
+        "com.squareup.leakcanary:leakcanary-android:2.10",
+        "com.squareup.okhttp3:okhttp:4.9.0",
+        "com.squareup.okio:okio:2.10.0",
+        "io.reactivex.rxjava3:rxandroid:3.0.0",
+        "io.reactivex.rxjava3:rxjava:3.1.0",
+        "io.reactivex.rxjava3:rxkotlin:3.0.0",
+        "javax.inject:javax.inject:1",
+        "junit:junit:4.13.2",
+        "org.junit.jupiter:junit-jupiter-api:5.9.3",
+        "org.junit.jupiter:junit-jupiter-engine:5.9.3",
+        "org.junit.jupiter:junit-jupiter-params:5.9.3",
+        "org.junit.platform:junit-platform-console:1.9.2",
+        "org.junit.platform:junit-platform-launcher:1.9.2",
+        "org.junit.platform:junit-platform-reporting:1.9.2",
+        "org.junit.vintage:junit-vintage-engine:5.9.3",
+        "org.robolectric:android-all:10-robolectric-5803371",
+        "org.robolectric:annotations:4.10.3",
+        "org.robolectric:robolectric:4.10.3",
+    ],
+    repositories = [
+        "https://repo1.maven.org/maven2",
+        "https://maven.google.com",
+    ],
+    use_starlark_android_rules = True,
+    version_conflict_policy = "pinned",
+)
+use_repo(maven, "android_mvn")
+
+# These root-level choices must match the Valdi release module.
+single_version_override(module_name = "protobuf", version = "27.0")
+single_version_override(module_name = "rules_apple", version = "4.0.0")
+single_version_override(module_name = "rules_pkg", version = "0.9.1")
+single_version_override(module_name = "zlib", version = "1.3.2")

@@ -30,13 +30,10 @@ valdi_module(
     ids_yaml = "ids.yaml",
     ios_module_name = "ComposeCore",
     ios_output_target = "release",
-    native_deps = select({
-        "@snap_platforms//conditions:macos": [
-            ":macos_directory_picker",
-            ":macos_image_export",
-        ],
-        "//conditions:default": [],
-    }),
+    macos_deps = [
+        ":macos_directory_picker",
+        ":macos_image_export",
+    ],
     res = [],
     visibility = ["//visibility:public"],
     deps = [

@@ -1,5 +1,9 @@
 # Project Plan – Valdi Jetpack Component Library
 
+> Historical bootstrap plan. The repository now uses Valdi `beta-0.1.1` with
+> bzlmod; see `README.md`, `docs/parity_matrix.md`, and
+> `docs/notes/20260816_valdi_0_1_1_migration.md` for current guidance.
+
 ## Background
 Valdi is an open source framework for building mobile apps, targeting Android and iOS. Valdi modules are written in typescript, and render natively on host platforms. It is React-like but is not React. It uses the Flexbox layout engine and some features of CSS. The source code is available at ../Valdi. 
 

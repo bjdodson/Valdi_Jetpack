@@ -68,8 +68,8 @@ require_source "imageExportNativeCommand" "$PRESENTATION" "presentation must ato
 require_source "ImageExportResult" "$PRESENTATION" "presentation must return a typed result"
 require_source "ImageExportReason" "$PRESENTATION" "native outcomes must include a stable typed reason"
 require_source "macOSNativeActionAvailable()" "$PRESENTATION" "export must use the shared platform guard"
-require_source "Device.isMacOS()" "$AVAILABILITY" "export availability must use the truthful native macOS capability"
-require_source 'typeof window !== "undefined"' "$AVAILABILITY" "desktop web must be excluded from native availability"
+require_source "Device.isDesktop()" "$AVAILABILITY" "export availability must require an upstream native desktop capability"
+require_source "Device.isWeb()" "$AVAILABILITY" "desktop web must be excluded through Valdi's upstream web capability"
 require_source 'iosClass="VJComposeImageExportBridge"' "$PRESENTATION" "presentation must request the namespaced native class"
 
 if grep -Fq "NSDataWritingWithoutOverwriting" "$NATIVE"; then

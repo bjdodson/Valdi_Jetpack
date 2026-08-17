@@ -74,7 +74,7 @@ describe('native action helpers', () => {
     expect(imageExportNativeCommand('share:1', 'file:///tmp/image.png', 'image.png', false)).toBe('');
   });
 
-  it('requires the native macOS capability and rejects DOM-backed runtimes', () => {
+  it('requires a native desktop runtime and rejects web-backed desktops', () => {
     expect(nativeMacOSActionAvailable(true, false)).toBe(true);
     expect(nativeMacOSActionAvailable(true, true)).toBe(false);
     expect(nativeMacOSActionAvailable(false, false)).toBe(false);
