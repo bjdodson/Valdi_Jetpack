@@ -9,8 +9,9 @@ Purpose: lightweight playground for Valdi UI (see https://github.com/snapchat/va
 - `docs/`: parity notes and project progress; `logs/` for appended run artifacts.
 
 ## Build and run
-- Mac app: `bazel run //apps/compose_playground:app_macos --snap_flavor=platform_development --@valdi//bzl/valdi:assets_mode=inline --repo_env=VALDI_PLATFORM_DEPENDENCIES=macos` (equivalent to `valdi install macos --application //apps/compose_playground:app_macos`).
-- Android/iOS targets exist but may need local toolchains (Xcode, Android NDK/SDK). Set `ANDROID_NDK_HOME` when running Android targets.
+- Mac app: `bazelisk run //apps/compose_playground:app_macos --snap_flavor=platform_development --@valdi//bzl/valdi:assets_mode=inline --repo_env=VALDI_PLATFORM_DEPENDENCIES=macos` (equivalent to `valdi install macos --application //apps/compose_playground:app_macos`).
+- `MODULE.bazel` pins Valdi `beta-0.1.1` and its custom registry; keep `MODULE.bazel.lock` in sync. Do not reintroduce a WORKSPACE fallback.
+- Android SDK/NDK dependencies are hermetic in Valdi 0.1.x. Xcode remains required for Apple targets; `adb` is required only for Android device installation.
 - Module loader expects `root_component_path` in the form `<Component>@<valdi_module>/src/...`; avoid repository-relative prefixes (a prior issue).
 - Import compose primitives via `compose_core/src/index` (not `compose_core/src`), matching the generated `.valdimodule` contents.
 

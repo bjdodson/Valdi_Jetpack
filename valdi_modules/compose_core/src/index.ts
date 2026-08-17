@@ -105,7 +105,6 @@ export {
 } from "./foundation/ImageExportActions";
 export {
   macOSNativeActionAvailable,
-  nativeActionWebRuntimePresent,
   nativeMacOSActionAvailable,
 } from "./foundation/NativeActionAvailability";
 export { type ComposeCorePlaceholder } from "./types/PlaceholderModel";

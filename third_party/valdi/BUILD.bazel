@@ -1,41 +1,6 @@
 exports_files([
-    "clang-harfbuzz-nontrivial-memcall.patch",
-    "clang-hermes-nontrivial-memcall.patch",
-    "clang-literal-operators.patch",
-    "device-macos-capability.patch",
-    "macos-custom-native-views.patch",
     "macos-respect-scroll-direction.patch",
 ])
-
-sh_test(
-    name = "device_macos_capability_patch_test",
-    srcs = ["test/device_macos_capability_patch_test.sh"],
-    data = ["device-macos-capability.patch"],
-)
-
-sh_test(
-    name = "clang_hermes_nontrivial_memcall_patch_test",
-    srcs = ["test/clang_hermes_nontrivial_memcall_patch_test.sh"],
-    data = ["clang-hermes-nontrivial-memcall.patch"],
-)
-
-sh_test(
-    name = "clang_harfbuzz_nontrivial_memcall_patch_test",
-    srcs = ["test/clang_harfbuzz_nontrivial_memcall_patch_test.sh"],
-    data = ["clang-harfbuzz-nontrivial-memcall.patch"],
-)
-
-sh_test(
-    name = "clang_literal_operators_patch_test",
-    srcs = ["test/clang_literal_operators_patch_test.sh"],
-    data = ["clang-literal-operators.patch"],
-)
-
-sh_test(
-    name = "macos_custom_native_views_patch_test",
-    srcs = ["test/macos_custom_native_views_patch_test.sh"],
-    data = ["macos-custom-native-views.patch"],
-)
 
 sh_test(
     name = "macos_scroll_direction_patch_test",
