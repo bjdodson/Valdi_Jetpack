@@ -32,7 +32,7 @@ export function nextToggleValue(checked: boolean, disabled = false): boolean {
 /**
  * A controlled boolean input with explicit checkbox semantics.
  *
- * Pinned Valdi has no distinct switch accessibility category or portable
+ * Valdi 0.1.1 has no distinct switch accessibility category or portable
  * keyboard/focus callbacks. The control uses the supported checkbox category,
  * selected/disabled states, and native accessibility activation.
  */

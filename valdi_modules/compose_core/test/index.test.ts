@@ -27,7 +27,6 @@ import {
   nextTabValue,
   nextTextFieldValue,
   nextToggleValue,
-  remember,
   resolveButtonColors,
   resolveComposeControlTheme,
   resolveSelectColors,
@@ -51,11 +50,6 @@ import {
     throw new Error(`Expected ${component.name} to expose onRender`);
   }
 });
-
-const value = remember(() => 42);
-if (value !== 42) {
-  throw new Error("remember() did not invoke factory");
-}
 
 if (textLineHeightRatio(18, "system 12") !== 1.5) {
   throw new Error("Text did not convert an absolute line height to Valdi's multiplier");

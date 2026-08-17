@@ -48,8 +48,8 @@ export function nextSegmentValue(
 /**
  * A controlled single-selection control.
  *
- * The pinned Valdi API exposes tap and radio accessibility state, but not a
- * portable focus model or arrow-key event surface. Keyboard roving selection
+ * Valdi 0.1.1 exposes tap and radio accessibility state, but not a portable
+ * focus model or arrow-key event surface. Keyboard roving selection
  * is therefore intentionally deferred rather than simulated inconsistently.
  */
 export class SegmentedControl extends Component<SegmentedControlProps> {

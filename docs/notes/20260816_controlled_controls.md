@@ -21,9 +21,9 @@ caller-owned `value`, never a potentially stale native return-event payload.
 Disabled Select triggers omit the generated activation hint instead of inviting
 an action; an explicit caller-provided hint is still preserved.
 
-## Accessibility and pinned-runtime limits
+## Accessibility and Valdi 0.1.1 limits
 
-Controls expose the closest categories available in the pinned Valdi runtime,
+Controls expose the closest categories available in Valdi 0.1.1,
 plus explicit selected/value/disabled state, accessibility labels, stable test
 IDs, and matching touch guards. Segmented controls, tab bars, and select options
 use supported radio semantics. Toggle uses checkbox semantics because the
@@ -41,7 +41,7 @@ TypeScript components. As a result:
 
 These behaviors are intentionally documented rather than approximated with
 platform-specific branches. They can be added behind the same controlled APIs
-when the pinned Valdi dependency exposes a common focus and keyboard contract.
+when Valdi exposes a common focus and keyboard contract.
 
 Behavioral helper coverage lives in `ControlledControls.spec.ts` and runs
 through the generated `//valdi_modules/compose_core:test` Valdi/Jasmine target;

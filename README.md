@@ -46,6 +46,7 @@ bazelisk test \
 - `root_component_path` must use the `<Component>@<valdi_module>/src/...` format so the Valdi module loader resolves bundled assets (repository-relative paths will fail at runtime).
 - When consuming `compose_core`, import from `compose_core/src/index` to match the generated `.valdimodule` contents.
 - TypeScript is strict via `_configs/base.tsconfig.json`; keep exports surfaced through `src/index.ts` files.
+- Compose names provide familiar component vocabulary, not a Compose runtime. Valdi has no hooks or `remember`; callers own durable state through `StatefulComponent` and `setState`, while controlled Jetpack components receive values and change callbacks.
 - `MODULE.bazel` is the dependency source of truth; `MODULE.bazel.lock` records the resolved graph. There is no legacy WORKSPACE fallback.
 - Native directory selection and image export are macOS-only. Other platforms, including desktop web, render explicit unavailable states without instantiating an AppKit custom view.
 

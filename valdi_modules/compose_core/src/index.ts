@@ -108,11 +108,3 @@ export {
   nativeMacOSActionAvailable,
 } from "./foundation/NativeActionAvailability";
 export { type ComposeCorePlaceholder } from "./types/PlaceholderModel";
-
-/**
- * Compose-style `remember` stub. The real implementation will delegate to
- * Valdi's state store once the runtime bridge is in place.
- */
-export function remember<T>(factory: () => T): T {
-  return factory();
-}

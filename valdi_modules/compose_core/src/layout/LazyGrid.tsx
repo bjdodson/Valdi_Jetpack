@@ -49,7 +49,7 @@ function finiteNonNegative(value: number | undefined, fallback: number): number 
 
 /**
  * Resolves the item window independently from geometry. Web currently falls
- * back to the full collection because pinned Valdi's IntersectionObserver
+ * back to the full collection because Valdi 0.1.1's IntersectionObserver
  * bridge does not continuously report scroll offsets for tall elements.
  */
 export function lazyGridMaterializationWindow(

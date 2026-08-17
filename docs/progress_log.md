@@ -91,3 +91,5 @@
 - Fresh-cloned current bjdodson/Valdi_Jetpack origin/main at 73f14b2 into the previously missing saved-project path; preserved Valdi_Jetpack_Bak untouched. Began architecture/dependency audit and official latest-Valdi verification.
 ## 2026-08-17T06:25:32Z – Codex
 - Migrated from Valdi beta-0.0.1/WORKSPACE to integrity-pinned beta-0.1.1 (41d6d87643e0b9f9dcd8d7b7c162cf0ac7c969a2) with bzlmod + lockfile. Retired upstreamed Yoga/Hermes/custom-view patches, verified upgraded Harfbuzz unpatched, replaced Device.isMacOS fork with upstream desktop+web capability, and kept only the AppKit scroll patch. Validated bazel query //..., 7 focused tests, both Valdi module builds, and the full signed app_macos build.
+## 2026-08-17T06:32:38Z – Codex
+- Removed the misleading public remember() placeholder, which recreated values on every call despite Valdi 0.1.1 having no hook runtime. Documented the intentional source break and migration to StatefulComponent/setState plus controlled component ownership; refreshed current runtime-limit language. Validated 6 representative Valdi/structural tests and both module builds.
