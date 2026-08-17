@@ -805,6 +805,49 @@
         ]
       }
     },
+    "@@rules_android_ndk~//:extension.bzl%android_ndk_repository_extension": {
+      "general": {
+        "bzlTransitiveDigest": "oV/TPZWCXAAcpJG/DBV/lNiWCISUTk5ba0KRjUb7adg=",
+        "usagesDigest": "YDCA+xjCcSWVg8TKWPHWFPzifhBAPCnQFGMGKKc2IHQ=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "androidndk": {
+            "bzlFile": "@@rules_android_ndk~//:rules.bzl",
+            "ruleClassName": "android_ndk_repository",
+            "attributes": {}
+          }
+        },
+        "recordedRepoMappingEntries": []
+      }
+    },
+    "@@rules_android~//bzlmod_extensions:com_android_dex.bzl%com_android_dex_extension": {
+      "general": {
+        "bzlTransitiveDigest": "MWS7z+UsZhzNQ4yxUHaRYQ3FmSzqtmRQJ0G1ebwV7pk=",
+        "usagesDigest": "IbUGiAlcWBOmqDOysPP4XaSE5JBCirn1QLca9Q71Pyo=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "com_android_dex": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_archive",
+            "attributes": {
+              "url": "https://android.googlesource.com/platform/dalvik/+archive/5a81c499a569731e2395f7c8d13c0e0d4e17a2b6.tar.gz",
+              "build_file": "@@rules_android~//bzlmod_extensions:com_android_dex.BUILD"
+            }
+          }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "rules_android~",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
+      }
+    },
     "@@rules_android~//rules/android_sdk_repository:rule.bzl%android_sdk_repository_extension": {
       "general": {
         "bzlTransitiveDigest": "NAy+0M15JNVEBb8Tny6t7j3lKqTnsAMjoBB6LJ+C370=",
@@ -816,6 +859,23 @@
           "androidsdk": {
             "bzlFile": "@@rules_android~//rules/android_sdk_repository:rule.bzl",
             "ruleClassName": "_android_sdk_repository",
+            "attributes": {}
+          }
+        },
+        "recordedRepoMappingEntries": []
+      }
+    },
+    "@@rules_kotlin~//:bzl/hermetic_android_sdk.bzl%hermetic_android_sdk_extension": {
+      "general": {
+        "bzlTransitiveDigest": "d6d6FlGlvOj4DgODQJDdssy5HHDe9bSVRtrMmWt7eXY=",
+        "usagesDigest": "yPeA9yIFL+HUg8Z1Dhr9O30Wx/BjQVOy2ZTCGmM9VPY=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "androidsdk": {
+            "bzlFile": "@@rules_kotlin~//:bzl/hermetic_android_sdk.bzl",
+            "ruleClassName": "_hermetic_android_sdk",
             "attributes": {}
           }
         },

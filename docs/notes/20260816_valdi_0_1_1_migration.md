@@ -31,6 +31,10 @@ git ls-remote https://github.com/Snapchat/Valdi.git \
   Bazel tools, and removes the legacy local Android NDK crosstool selection.
 - `MODULE.bazel.lock` records the complete resolved graph. The obsolete
   `WORKSPACE` file and unused `Valdi_Widgets` fetch were removed.
+- `platforms` is a direct root dependency because Valdi's generated Android
+  application graph resolves `@platforms` from the consumer repository. The
+  Android and iOS application targets both complete analysis with their
+  official 0.1.1 platform flags.
 - macOS-only Objective-C bridges use the upstream `macos_deps` API rather than
   a platform-select workaround in generic native dependencies.
 
