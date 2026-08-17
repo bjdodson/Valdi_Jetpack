@@ -2,6 +2,10 @@
 
 Valdi Jetpack is a small playground that ships reusable Compose-style primitives (`compose_core`) and a sample Valdi app (`compose_playground`) to exercise them. It targets the official [Valdi](https://github.com/Snapchat/Valdi) `beta-0.1.1` release at commit `41d6d87643e0b9f9dcd8d7b7c162cf0ac7c969a2`.
 
+The exact upstream evidence and compatibility decisions are recorded in the
+[0.1.1 migration note](docs/notes/20260816_valdi_0_1_1_migration.md). Current
+lower-priority work is kept in the [modernization backlog](docs/modernization_backlog.md).
+
 ## Screenshot
 <img src="docs/images/latest-screenshot.png" width="400" />
 
