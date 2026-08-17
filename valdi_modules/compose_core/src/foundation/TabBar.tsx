@@ -45,7 +45,7 @@ export function nextTabValue(
 /**
  * A controlled tab row for switching sibling views in place.
  *
- * Pinned Valdi does not expose a native `tab` accessibility category, focus
+ * Valdi 0.1.1 does not expose a native `tab` accessibility category, focus
  * traversal API, or portable arrow-key callbacks. Each tab uses its closest
  * supported single-selection semantic (`radio`) with selected and disabled
  * state represented explicitly.

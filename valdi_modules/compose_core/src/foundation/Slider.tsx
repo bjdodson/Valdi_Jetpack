@@ -76,7 +76,7 @@ export function sliderValueFromPosition(
 /**
  * A controlled slider built from Valdi touch and layout primitives.
  *
- * The pinned Valdi API has no portable keyboard-arrow or adjustable
+ * Valdi 0.1.1 has no portable keyboard-arrow or adjustable
  * accessibility action callback. Touch, value, disabled state, and accessible
  * value remain explicit; keyboard adjustment can be added when Valdi exposes
  * a generic key/focus surface.

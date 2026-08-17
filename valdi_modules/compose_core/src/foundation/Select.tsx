@@ -110,7 +110,7 @@ export function resolveSelectColors(
  * A controlled single-selection dropdown. Only transient menu visibility is
  * internal; `value` always remains caller-owned.
  *
- * The pinned Valdi surface provides tap and accessibility activation but no
+ * Valdi 0.1.1 provides tap and accessibility activation but no portable
  * generic key event or focus-management API. The trigger and options expose
  * the strongest portable button/radio semantics available today; direct
  * arrow-key, Escape, and focus-restoration behavior is deferred until the

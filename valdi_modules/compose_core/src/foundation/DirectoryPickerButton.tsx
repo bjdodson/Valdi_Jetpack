@@ -40,7 +40,7 @@ export function resolveDirectoryPickerCopy(overrides?: Partial<DirectoryPickerCo
   return mergeDefinedOverrides(defaultDirectoryPickerCopy, overrides);
 }
 
-/** True when the pinned runtime can host the macOS native directory chooser. */
+/** True when the current Valdi runtime can host the macOS native directory chooser. */
 export function directoryPickerAvailable(): boolean {
   return macOSNativeActionAvailable();
 }

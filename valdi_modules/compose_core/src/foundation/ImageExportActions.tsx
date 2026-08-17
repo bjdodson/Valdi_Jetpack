@@ -174,7 +174,7 @@ export function imageExportNativeCommand(
   });
 }
 
-/** True when the pinned runtime can host the macOS image-export bridge. */
+/** True when the current Valdi runtime can host the macOS image-export bridge. */
 export function imageExportAvailable(): boolean {
   return macOSNativeActionAvailable();
 }

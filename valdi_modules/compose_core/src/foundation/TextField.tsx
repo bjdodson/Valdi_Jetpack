@@ -60,7 +60,7 @@ export function resolveTextFieldColors(
 /**
  * Controlled single-line text input with Compose-style naming.
  *
- * The native field owns its keyboard session. Pinned Valdi does not expose a
+ * The native field owns its keyboard session. Valdi 0.1.1 does not expose a
  * portable imperative focus/request-keyboard API or generic key-down events,
  * so focus traversal and non-return keyboard shortcuts remain host concerns.
  */
