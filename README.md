@@ -18,6 +18,7 @@ bazelisk run //apps/compose_playground:app_macos \
   --@valdi//bzl/valdi:assets_mode=inline \
   --repo_env=VALDI_PLATFORM_DEPENDENCIES=macos
 # Equivalent: valdi install macos --application //apps/compose_playground:app_macos
+# Repository helper: scripts/bazel_macos_run.sh
 ```
 
 2) Build just the Valdi module:
@@ -35,6 +36,12 @@ bazelisk test \
   //valdi_modules/compose_core:macos_directory_picker_contract_test \
   //valdi_modules/compose_core:macos_image_export_contract_test
 ```
+
+Run the reproducible repository validation entry point with
+`scripts/validate.sh`; add `--macos-app` to include the signed playground app
+build. Set `VALDI_JETPACK_BAZEL_OUTPUT_ROOT` when a machine needs a custom Bazel
+output location. Device installation helpers live in `scripts/` and report
+missing host tools before they build.
 
 ## Project layout
 - `apps/compose_playground/`: Valdi app entry with `root_component_path = ComposePlaygroundApp@compose_playground/src/ComposePlaygroundApp`.

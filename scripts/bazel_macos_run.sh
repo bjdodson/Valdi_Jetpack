@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-# This script builds //apps/compose_playground using Bazel and then runs it
-# on the local machine
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." >/dev/null && pwd)"
 
-set -o errexit  # Exit on most errors (see the manual)
-set -o nounset  # Disallow expansion of unset variables
-set -o pipefail # Use last non-zero exit code in a pipeline
-set -o xtrace   # Print commands as they are executed
-
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-ROOT_DIR="$SCRIPT_DIR/../"
-
-pushd "$ROOT_DIR"
-bazel build "//apps/compose_playground:app_macos"
-./bazel-bin/apps/compose_playground/app_macos_bin
-popd
+cd "$ROOT_DIR"
+exec bazelisk run //apps/compose_playground:app_macos \
+  --snap_flavor=platform_development \
+  --@valdi//bzl/valdi:assets_mode=inline \
+  --repo_env=VALDI_PLATFORM_DEPENDENCIES=macos
