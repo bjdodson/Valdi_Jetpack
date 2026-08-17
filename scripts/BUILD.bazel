@@ -1,0 +1,11 @@
+sh_test(
+    name = "developer_workflows_test",
+    srcs = ["test/developer_workflows_test.sh"],
+    data = [
+        "bazel_android_install.sh",
+        "bazel_hotreload.sh",
+        "bazel_ios_install.sh",
+        "bazel_macos_run.sh",
+        "validate.sh",
+    ],
+)
